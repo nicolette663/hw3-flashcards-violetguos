@@ -14,6 +14,8 @@ class MenuScreen {
     this.choiceDivHelper(2);
 
     this.containerElement = containerElement;
+    this.addClickChoice();
+
   }
 
   show() {
@@ -32,4 +34,25 @@ class MenuScreen {
     const choiceDiv = document.querySelector('#choices');
     choiceDiv.appendChild(h);
   }
+
+
+
+
+  addClickChoice(){
+    const choiceDiv = document.querySelector('#choices');
+    console.log(choiceDiv.childNodes[0]);
+    this._initAnim = this._initAnim.bind(this);
+    choiceDiv.childNodes[0].addEventListener('click', 
+      this._initAnim
+    );
+
+  }
+
+  _initAnim(event){
+    this.hide();
+    
+  }
+
+  
+
 }

@@ -1,3 +1,16 @@
 /*
 TODO(you): Write any additional styles you need here.
 */
+.flashcard-box .word {
+    animation: fadein-animation 0.5s;
+  }
+  
+  @keyframes my-fadein-animation {
+    10%, 70% {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
