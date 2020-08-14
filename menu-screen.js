@@ -16,6 +16,8 @@ class MenuScreen {
     this.containerElement = containerElement;
     this.addClickChoice();
 
+    this.hidden = false;
+
   }
 
   show() {
@@ -24,6 +26,7 @@ class MenuScreen {
 
   hide() {
     this.containerElement.classList.add('inactive');
+    
   }
 
   choiceDivHelper(i){
@@ -40,7 +43,6 @@ class MenuScreen {
 
   addClickChoice(){
     const choiceDiv = document.querySelector('#choices');
-    console.log(choiceDiv.childNodes[0]);
     this._initAnim = this._initAnim.bind(this);
     choiceDiv.childNodes[0].addEventListener('click', 
       this._initAnim
@@ -50,6 +52,7 @@ class MenuScreen {
 
   _initAnim(event){
     this.hide();
+    document.dispatchEvent(new CustomEvent('menu-selected'));
     
   }
 

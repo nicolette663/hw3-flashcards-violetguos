@@ -18,6 +18,11 @@ class App {
     const resultElement = document.querySelector('#results');
     this.results = new ResultsScreen(resultElement);
 
+    this._onSelectMenu = this._onSelectMenu.bind(this);
+
+    document.addEventListener('menu-selected', this._onSelectMenu);
+
+
     // Uncomment this pair of lines to see the "flashcard" screen:
     // this.menu.hide();
     // this.flashcards.show();
@@ -25,5 +30,10 @@ class App {
     // Uncomment this pair of lines to see the "results" screen:
     // this.menu.hide();
     // this.results.show();
+  }
+
+  _onSelectMenu(){
+    console.log("fire");
+    this.flashcards.show();
   }
 }
