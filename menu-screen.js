@@ -8,6 +8,11 @@
 
 class MenuScreen {
   constructor(containerElement) {
+    // for loop doesn't work
+    this.choiceDivHelper(0);
+    this.choiceDivHelper(1);
+    this.choiceDivHelper(2);
+
     this.containerElement = containerElement;
   }
 
@@ -17,5 +22,14 @@ class MenuScreen {
 
   hide() {
     this.containerElement.classList.add('inactive');
+  }
+
+  choiceDivHelper(i){
+    // plug in topics from constant.js
+    const h = document.createElement("div")                // Create a <h1> element
+    const t = document.createTextNode(FLASHCARD_DECKS[i]['title']);     // Create a text node
+    h.appendChild(t);
+    const choiceDiv = document.querySelector('#choices');
+    choiceDiv.appendChild(h);
   }
 }
