@@ -13,14 +13,18 @@ class App {
     this.menu = new MenuScreen(menuElement);
 
     const mainElement = document.querySelector('#main');
-    this.flashcards = new FlashcardScreen(mainElement);
+    this.flashcards_css = new FlashcardScreen(mainElement, 0);
+    this.flashcards_basic = new FlashcardScreen(mainElement, 1);
 
     const resultElement = document.querySelector('#results');
     this.results = new ResultsScreen(resultElement);
 
-    this._onSelectMenu = this._onSelectMenu.bind(this);
+    this._onSelectMenuCSS = this._onSelectMenuCSS.bind(this);
+    this._onSelectMenuBasic = this._onSelectMenuBasic.bind(this);
 
-    document.addEventListener('menu-selected', this._onSelectMenu);
+    document.addEventListener('css-menu-selected', this._onSelectMenuCSS);
+    document.addEventListener('basic-menu-selected', this._onSelectMenuBasic);
+
 
 
     // Uncomment this pair of lines to see the "flashcard" screen:
@@ -32,8 +36,12 @@ class App {
     // this.results.show();
   }
 
-  _onSelectMenu(){
-    console.log("fire");
-    this.flashcards.show();
+  _onSelectMenuCSS(){
+    this.flashcards_css.show();
   }
+
+  _onSelectMenuBasic(){
+    this.flashcards_basic.show();
+  }
+
 }

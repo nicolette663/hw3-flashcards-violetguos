@@ -15,9 +15,6 @@ class MenuScreen {
 
     this.containerElement = containerElement;
     this.addClickChoice();
-
-    this.hidden = false;
-
   }
 
   show() {
@@ -38,24 +35,23 @@ class MenuScreen {
     choiceDiv.appendChild(h);
   }
 
-
-
-
   addClickChoice(){
     const choiceDiv = document.querySelector('#choices');
-    this._initAnim = this._initAnim.bind(this);
-    choiceDiv.childNodes[0].addEventListener('click', 
-      this._initAnim
-    );
-
+    this._initAnimCSS = this._initAnimCSS.bind(this);
+    this._initAnimBasic = this._initAnimBasic.bind(this);
+    choiceDiv.childNodes[0].addEventListener('click', this._initAnimCSS);
+    choiceDiv.childNodes[1].addEventListener('click', this._initAnimBasic);
   }
 
-  _initAnim(event){
+  _initAnimCSS(event){
     this.hide();
-    document.dispatchEvent(new CustomEvent('menu-selected'));
-    
-  }
+    document.dispatchEvent(new CustomEvent('css-menu-selected'));
+  }  
 
-  
+
+  _initAnimBasic(event){
+    this.hide();
+    document.dispatchEvent(new CustomEvent('basic-menu-selected'));
+  }  
 
 }

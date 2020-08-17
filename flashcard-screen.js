@@ -8,17 +8,36 @@
 // - Adding additional fields
 
 class FlashcardScreen {
-  constructor(containerElement) {
+  constructor(containerElement, topic) {
     this.containerElement = containerElement;
+    this.topic = topic;
+    this.currentCard = 0;
+
+
+
+
+  
   }
 
   show() {
     this.containerElement.classList.remove('inactive');
     const flashcardContainer = document.querySelector('#flashcard-container');
-    const card = new Flashcard(flashcardContainer, 'word', 'definition');
+    
+    // all the keys
+    const keys = Object.keys(FLASHCARD_DECKS[this.topic]['words']);
+
+    // TODO: choose a random key??
+
+    const card = new Flashcard(flashcardContainer, 
+      keys[this.currentCard],
+      FLASHCARD_DECKS[this.topic]['words'][keys[this.currentCard]]
+      );
   }
 
   hide() {
     this.containerElement.classList.add('inactive');
   }
+
+
+  
 }
