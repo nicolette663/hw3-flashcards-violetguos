@@ -13,8 +13,7 @@ class App {
     this.menu = new MenuScreen(menuElement);
 
     const mainElement = document.querySelector('#main');
-    this.flashcards_css = new FlashcardScreen(mainElement, 0);
-    this.flashcards_basic = new FlashcardScreen(mainElement, 1);
+    this.mainElement = mainElement;
 
     const resultElement = document.querySelector('#results');
     this.results = new ResultsScreen(resultElement);
@@ -37,10 +36,14 @@ class App {
   }
 
   _onSelectMenuCSS(){
+    this.flashcards_css = new FlashcardScreen(this.mainElement, 0);
+
     this.flashcards_css.show();
   }
 
   _onSelectMenuBasic(){
+    this.flashcards_basic = new FlashcardScreen(this.mainElement, 1);
+
     this.flashcards_basic.show();
   }
 

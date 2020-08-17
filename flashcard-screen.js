@@ -19,7 +19,8 @@ class FlashcardScreen {
   show() {
     this.containerElement.classList.remove('inactive');
     const flashcardContainer = document.querySelector('#flashcard-container');
-    
+    console.log("topic", this.topic)
+    console.log(flashcardContainer);
     // all the keys
     const keys = Object.keys(FLASHCARD_DECKS[this.topic]['words']);
 
@@ -38,7 +39,7 @@ class FlashcardScreen {
   }
   
   _onCardFinish(event){
-    //this.currentCard++;
+    this.currentCard++;
     this.show();
   }
 

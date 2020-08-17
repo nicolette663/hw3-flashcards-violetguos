@@ -9,14 +9,12 @@
 class Flashcard {
   constructor(containerElement, frontText, backText) {
     this.containerElement = containerElement;
-    this.containerElement.innerHTML = '';
 
     this._flipCard = this._flipCard.bind(this);
 
     this._startDrag = this._startDrag.bind(this);
     this._duringDrag = this._duringDrag.bind(this);
     this._endDrag = this._endDrag.bind(this);
-    
     this.flashcardElement = this._createFlashcardDOM(frontText, backText);
     this.containerElement.append(this.flashcardElement);
 
