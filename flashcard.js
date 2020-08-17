@@ -66,6 +66,8 @@ class Flashcard {
 
   _flipCard(event) {
     this.flashcardElement.classList.toggle('show-word');
+    this.flashcardElement.removeEventListener('pointerup', this._flipCard);
+
   }
 
   _startDrag(event) {
@@ -81,7 +83,14 @@ class Flashcard {
       const currentX = event.clientX;
       const delta = currentX - this.originX;
       const element = event.currentTarget;
-      element.style.transform = 'translateX(' + delta + 'px)';
+      const angle = 0.2 * delta;
+      element.style.transform = 'translateX(' + delta + 'px)' +' ' +'rotate('+ angle + 'deg)';
+    
+      if (Math.abs(delta) > 150) {
+        const docBody = document.querySelector('body');
+        
+        docBody.style.backgroundColor = '#97b7b7';
+      }
     }
   }
 
@@ -92,10 +101,14 @@ class Flashcard {
   
     const currentX = event.clientX;
     const delta = currentX - this.originX;
-    if (Math.abs(delta) > 50) {
-      // event.currentTarget.style.transform = '';
+    if (Math.abs(delta) > 150) {      
       event.currentTarget.style.display = 'none';
-      return;
+    }
+    else{
+      const docBody = document.querySelector('body');
+      docBody.style.backgroundColor = '#d0e6df';
+      event.currentTarget.style.transform = '';
+
     }
   
   }  
