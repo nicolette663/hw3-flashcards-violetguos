@@ -5,12 +5,8 @@ TODO(you): Write any additional styles you need here.
     animation: fadein-animation 0.5s;
   }
   
-  @keyframes my-fadein-animation {
-    10%, 70% {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  @keyframes fadein-animation {
+    from {top:200px; opacity: 0;}
+    to {top:0px; opacity: 1;}
   }
   
