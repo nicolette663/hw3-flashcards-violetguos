@@ -22,8 +22,7 @@ class Flashcard {
     this.flashcardElement.addEventListener('pointerup', this._flipCard);
 
     this.originX = null;
-    this.flashcardElement.addEventListener('pointerdown', 
-    this._startDrag);
+    this.flashcardElement.addEventListener('pointerdown', this._startDrag);
     this.flashcardElement.addEventListener('pointermove', this._duringDrag);
     this.flashcardElement.addEventListener('pointerup', this._endDrag);
     this.flashcardElement.addEventListener('pointercancel', this._endDrag);
@@ -66,7 +65,6 @@ class Flashcard {
 
   _flipCard(event) {
     this.flashcardElement.classList.toggle('show-word');
-    this.flashcardElement.removeEventListener('pointerup', this._flipCard);
 
   }
 
@@ -98,9 +96,11 @@ class Flashcard {
     if (!this.originX) {
       return;
     }
-  
     const currentX = event.clientX;
     const delta = currentX - this.originX;
+    this.originX = null;
+
+    console.log(delta);
     if (Math.abs(delta) > 150) {      
       event.currentTarget.style.display = 'none';
     }
@@ -108,7 +108,7 @@ class Flashcard {
       const docBody = document.querySelector('body');
       docBody.style.backgroundColor = '#d0e6df';
       event.currentTarget.style.transform = '';
-
+      return;
     }
   
   }  
