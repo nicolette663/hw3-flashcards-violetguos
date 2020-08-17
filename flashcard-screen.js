@@ -12,7 +12,8 @@ class FlashcardScreen {
     this.containerElement = containerElement;
     this.topic = topic;
     this.currentCard = 0;
-  
+    this._onCardFinish = this._onCardFinish.bind(this);
+    document.addEventListener('card-finish', this._onCardFinish);
   }
 
   show() {
@@ -27,8 +28,8 @@ class FlashcardScreen {
     const card = new Flashcard(flashcardContainer, 
       keys[this.currentCard],
       FLASHCARD_DECKS[this.topic]['words'][keys[this.currentCard]]
-      );
-
+    );
+    
     
   }
 
@@ -36,4 +37,9 @@ class FlashcardScreen {
     this.containerElement.classList.add('inactive');
   }
   
+  _onCardFinish(event){
+    //this.currentCard++;
+    this.show();
+  }
+
 }

@@ -9,6 +9,7 @@
 class Flashcard {
   constructor(containerElement, frontText, backText) {
     this.containerElement = containerElement;
+    this.containerElement.innerHTML = '';
 
     this._flipCard = this._flipCard.bind(this);
 
@@ -26,7 +27,6 @@ class Flashcard {
     this.flashcardElement.addEventListener('pointermove', this._duringDrag);
     this.flashcardElement.addEventListener('pointerup', this._endDrag);
     this.flashcardElement.addEventListener('pointercancel', this._endDrag);
-
 
   }
 
@@ -93,6 +93,8 @@ class Flashcard {
   }
 
   _endDrag(event) {
+    let fin = false;
+
     if (!this.originX) {
       return;
     }
@@ -100,17 +102,19 @@ class Flashcard {
     const delta = currentX - this.originX;
     this.originX = null;
 
-    console.log(delta);
     if (Math.abs(delta) > 150) {      
       event.currentTarget.style.display = 'none';
+      
+      this.flashcardElement = this.flashcardElement.remove();
+
+      document.dispatchEvent(new CustomEvent('card-finish'));
     }
     else{
       const docBody = document.querySelector('body');
       docBody.style.backgroundColor = '#d0e6df';
       event.currentTarget.style.transform = '';
       return;
-    }
-  
+    }       
   }  
   
 }
