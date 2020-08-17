@@ -12,10 +12,6 @@ class FlashcardScreen {
     this.containerElement = containerElement;
     this.topic = topic;
     this.currentCard = 0;
-
-
-
-
   
   }
 
@@ -32,12 +28,12 @@ class FlashcardScreen {
       keys[this.currentCard],
       FLASHCARD_DECKS[this.topic]['words'][keys[this.currentCard]]
       );
+
+    
   }
 
   hide() {
     this.containerElement.classList.add('inactive');
   }
-
-
   
 }

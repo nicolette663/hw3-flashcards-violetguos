@@ -12,10 +12,23 @@ class Flashcard {
 
     this._flipCard = this._flipCard.bind(this);
 
+    this._startDrag = this._startDrag.bind(this);
+    this._duringDrag = this._duringDrag.bind(this);
+    this._endDrag = this._endDrag.bind(this);
+    
     this.flashcardElement = this._createFlashcardDOM(frontText, backText);
     this.containerElement.append(this.flashcardElement);
 
     this.flashcardElement.addEventListener('pointerup', this._flipCard);
+
+    this.originX = null;
+    this.flashcardElement.addEventListener('pointerdown', 
+    this._startDrag);
+    this.flashcardElement.addEventListener('pointermove', this._duringDrag);
+    this.flashcardElement.addEventListener('pointerup', this._endDrag);
+    this.flashcardElement.addEventListener('pointercancel', this._endDrag);
+
+
   }
 
   // Creates the DOM object representing a flashcard with the given
@@ -54,4 +67,37 @@ class Flashcard {
   _flipCard(event) {
     this.flashcardElement.classList.toggle('show-word');
   }
+
+  _startDrag(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  
+    this.originX = event.clientX;
+    event.target.setPointerCapture(event.pointerId);
+  }
+  
+  _duringDrag(event) {
+    if (this.originX) {
+      const currentX = event.clientX;
+      const delta = currentX - this.originX;
+      const element = event.currentTarget;
+      element.style.transform = 'translateX(' + delta + 'px)';
+    }
+  }
+
+  _endDrag(event) {
+    if (!this.originX) {
+      return;
+    }
+  
+    const currentX = event.clientX;
+    const delta = currentX - this.originX;
+    if (Math.abs(delta) > 50) {
+      // event.currentTarget.style.transform = '';
+      event.currentTarget.style.display = 'none';
+      return;
+    }
+  
+  }  
+  
 }
