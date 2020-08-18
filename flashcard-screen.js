@@ -12,25 +12,28 @@ class FlashcardScreen {
     this.containerElement = containerElement;
     this.topic = topic;
     this.currentCard = 0;
-    this._onCardFinish = this._onCardFinish.bind(this);
-    document.addEventListener('card-finish', this._onCardFinish);
+    this._onOneCardFinish = this._onOneCardFinish.bind(this);
+    document.addEventListener('one-card-finish', this._onOneCardFinish);
+
+    this.totalCards =  Object.keys( FLASHCARD_DECKS[this.topic]['words']).length;
+    console.log("this.totalCards", this.totalCards);
   }
 
   show() {
     this.containerElement.classList.remove('inactive');
     const flashcardContainer = document.querySelector('#flashcard-container');
-    console.log("topic", this.topic)
-    console.log(flashcardContainer);
+    flashcardContainer.innerHTML = '';
     // all the keys
     const keys = Object.keys(FLASHCARD_DECKS[this.topic]['words']);
-
-    // TODO: choose a random key??
 
     const card = new Flashcard(flashcardContainer, 
       keys[this.currentCard],
       FLASHCARD_DECKS[this.topic]['words'][keys[this.currentCard]]
     );
-    
+
+    if (this.currentCard == (this.totalCards-1)){
+      document.dispatchEvent(new CustomEvent('all-cards-finish'));
+    }
     
   }
 
@@ -38,9 +41,12 @@ class FlashcardScreen {
     this.containerElement.classList.add('inactive');
   }
   
-  _onCardFinish(event){
-    this.currentCard++;
-    this.show();
+  _onOneCardFinish(event){
+    if(this.currentCard < this.totalCards - 1){
+      this.currentCard++;
+      this.show();
+    }
+
   }
 
 }

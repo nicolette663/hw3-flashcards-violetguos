@@ -20,9 +20,11 @@ class App {
 
     this._onSelectMenuCSS = this._onSelectMenuCSS.bind(this);
     this._onSelectMenuBasic = this._onSelectMenuBasic.bind(this);
+    this._onAllCardsFinish = this._onAllCardsFinish.bind(this);
 
     document.addEventListener('css-menu-selected', this._onSelectMenuCSS);
     document.addEventListener('basic-menu-selected', this._onSelectMenuBasic);
+    document.addEventListener('all-cards-finish', this._onAllCardsFinish);
 
 
 
@@ -36,15 +38,21 @@ class App {
   }
 
   _onSelectMenuCSS(){
-    this.flashcards_css = new FlashcardScreen(this.mainElement, 0);
+    this.flashcards = new FlashcardScreen(this.mainElement, 0);
 
-    this.flashcards_css.show();
+    this.flashcards.show();
   }
 
   _onSelectMenuBasic(){
-    this.flashcards_basic = new FlashcardScreen(this.mainElement, 1);
+    this.flashcards = new FlashcardScreen(this.mainElement, 1);
 
-    this.flashcards_basic.show();
+    this.flashcards.show();
+  }
+
+  _onAllCardsFinish(){
+    this.menu.hide();
+    this.flashcards.hide();
+    this.results.show();
   }
 
 }

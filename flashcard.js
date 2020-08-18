@@ -104,8 +104,20 @@ class Flashcard {
       event.currentTarget.style.display = 'none';
       
       this.flashcardElement = this.flashcardElement.remove();
+      document.dispatchEvent(new CustomEvent('one-card-finish'));
 
-      document.dispatchEvent(new CustomEvent('card-finish'));
+
+      if(delta < 0){
+        document.dispatchEvent(new CustomEvent('card-wrong'));
+        document.dispatchEvent(new CustomEvent('one-card-finish'));
+
+      }
+      else if(delta > 0){
+        document.dispatchEvent(new CustomEvent('card-right'));
+        document.dispatchEvent(new CustomEvent('one-card-finish'));
+
+      }
+
     }
     else{
       const docBody = document.querySelector('body');
