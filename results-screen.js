@@ -18,9 +18,16 @@ class ResultsScreen {
     document.addEventListener('card-wrong', this._onCardWrong);
   }
 
-  show(numberCorrect, numberWrong) {
+  show() {
     this.containerElement.classList.remove('inactive');
-    console.log(this.containerElement);
+    if (this.numRight > 0)
+      this.numRight++;
+    if (this.numWrong > 0)
+      this.numWrong++;
+
+    const rightSpan =  this.containerElement.querySelectorAll(".correct");
+    rightSpan[0].textContent = this.numRight.toString();
+    console.log(rightSpan);
   }
 
   hide() {
@@ -28,12 +35,12 @@ class ResultsScreen {
   }
 
 
-  _onCardRight(){
-    this.numRight++;
+  _onCardRight(event){
+    this.numRight = this.numRight+1;
   }
 
-  _onCardWrong(){
-    this.numWrong++;
+  _onCardWrong(event){
+    this.numWrong = this.numWrong + 1;
   }
 
 }

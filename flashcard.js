@@ -91,8 +91,6 @@ class Flashcard {
   }
 
   _endDrag(event) {
-    let fin = false;
-
     if (!this.originX) {
       return;
     }
@@ -108,14 +106,12 @@ class Flashcard {
 
 
       if(delta < 0){
+        this.numWrong++;
         document.dispatchEvent(new CustomEvent('card-wrong'));
-        document.dispatchEvent(new CustomEvent('one-card-finish'));
-
       }
       else if(delta > 0){
+        this.numRight++;
         document.dispatchEvent(new CustomEvent('card-right'));
-        document.dispatchEvent(new CustomEvent('one-card-finish'));
-
       }
 
     }

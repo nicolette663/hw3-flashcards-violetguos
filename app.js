@@ -18,23 +18,17 @@ class App {
     const resultElement = document.querySelector('#results');
     this.results = new ResultsScreen(resultElement);
 
-    this._onSelectMenuCSS = this._onSelectMenuCSS.bind(this);
-    this._onSelectMenuBasic = this._onSelectMenuBasic.bind(this);
-    this._onAllCardsFinish = this._onAllCardsFinish.bind(this);
+    // this._onSelectMenuCSS = this._onSelectMenuCSS.bind(this);
+    // this._onSelectMenuBasic = this._onSelectMenuBasic.bind(this);
+    // this._onAllCardsFinish = this._onAllCardsFinish.bind(this);
 
-    document.addEventListener('css-menu-selected', this._onSelectMenuCSS);
-    document.addEventListener('basic-menu-selected', this._onSelectMenuBasic);
-    document.addEventListener('all-cards-finish', this._onAllCardsFinish);
+    // document.addEventListener('css-menu-selected', this._onSelectMenuCSS);
+    // document.addEventListener('basic-menu-selected', this._onSelectMenuBasic);
+    // document.addEventListener('all-cards-finish', this._onAllCardsFinish);
 
 
 
-    // Uncomment this pair of lines to see the "flashcard" screen:
-    // this.menu.hide();
-    // this.flashcards.show();
-
-    // Uncomment this pair of lines to see the "results" screen:
-    // this.menu.hide();
-    // this.results.show();
+    this.results.show();
   }
 
   _onSelectMenuCSS(){

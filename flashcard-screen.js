@@ -30,11 +30,10 @@ class FlashcardScreen {
       keys[this.currentCard],
       FLASHCARD_DECKS[this.topic]['words'][keys[this.currentCard]]
     );
-
-    if (this.currentCard == (this.totalCards-1)){
+    if (this.currentCard == this.totalCards-1){
       document.dispatchEvent(new CustomEvent('all-cards-finish'));
     }
-    
+
   }
 
   hide() {
@@ -42,10 +41,11 @@ class FlashcardScreen {
   }
   
   _onOneCardFinish(event){
-    if(this.currentCard < this.totalCards - 1){
-      this.currentCard++;
+    this.currentCard++;
+    if(this.currentCard < this.totalCards){
       this.show();
     }
+
 
   }
 
