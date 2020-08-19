@@ -9,22 +9,20 @@
 class ResultsScreen {
   constructor(containerElement) {
     this.containerElement = containerElement;
-    this.numRight = 0;
-    this.numWrong = 0;
-    this._onCardRight = this._onCardRight.bind(this);
-    this._onCardWrong = this._onCardWrong.bind(this);
 
-    document.addEventListener('card-right', this._onCardRight);
-    document.addEventListener('card-wrong', this._onCardWrong);
+    this._onImperfectScore = this._onImperfectScore.bind(this);
+
   }
 
-  show() {
+  show(numRight, numWrong) {
+    this.numRight = numRight;
+    this.numWrong = numWrong;
     this.containerElement.classList.remove('inactive');
-    if (this.numRight > 0)
-      this.numRight++;
-    if (this.numWrong > 0)
-      this.numWrong++;
-    const score = this.numRight * 100;
+    // if (this.numRight > 0)
+    //   this.numRight++;
+    // if (this.numWrong > 0)
+    //   this.numWrong++;
+    const score = Math.round(this.numRight / (this.numRight + this.numWrong) * 100);
     const scoreSpan = this.containerElement.querySelector(".percent");
     scoreSpan.textContent = score.toString();
     const rightSpan =  this.containerElement.querySelector(".correct");
@@ -34,8 +32,9 @@ class ResultsScreen {
 
     if(score < 100){
       const button = this.containerElement.querySelector(".continue");
-      console.log("button");
+      console.log("button", button);
       button.textContent = "Continue";
+      button.addEventListener("click", this._onImperfectScore ); 
 
     }
     console.log(rightSpan);
@@ -47,12 +46,11 @@ class ResultsScreen {
   }
 
 
-  _onCardRight(event){
-    this.numRight = this.numRight+1;
-  }
 
-  _onCardWrong(event){
-    this.numWrong = this.numWrong + 1;
+
+  _onImperfectScore(events){
+    document.dispatchEvent(new CustomEvent('continue-wrong-cards'));
+    this.hide();
   }
 
 }

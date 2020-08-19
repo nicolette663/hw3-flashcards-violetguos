@@ -102,17 +102,16 @@ class Flashcard {
       event.currentTarget.style.display = 'none';
       
       this.flashcardElement = this.flashcardElement.remove();
-      document.dispatchEvent(new CustomEvent('one-card-finish'));
 
 
       if(delta < 0){
-        this.numWrong++;
         document.dispatchEvent(new CustomEvent('card-wrong'));
       }
       else if(delta > 0){
-        this.numRight++;
         document.dispatchEvent(new CustomEvent('card-right'));
       }
+      document.dispatchEvent(new CustomEvent('one-card-finish'));
+
 
     }
     else{
