@@ -31,23 +31,36 @@ class FlashcardScreen {
     this.totalCards =  Object.keys( FLASHCARD_DECKS[this.topic]['words']).length;
   }
 
-  show(cards=FLASHCARD_DECKS) {
-    
+  show(review=false) {
+    let cardIndex;
+    if(review){
+      // redo the cards we got wrong
+      this.totalCards = this.wrongCards.length;
+      cardIndex = this.wrongCards.pop();
+      // todo, check if the array empty
+      console.log(cardIndex);
+      console.log("wrong cards", this.wrongCards);
+    }
+    else{
+      cardIndex = this.currentCard;
+    }
     this.containerElement.classList.remove('inactive');
     const flashcardContainer = document.querySelector('#flashcard-container');
     flashcardContainer.innerHTML = '';
     // all the keys
-    const keys = Object.keys(cards[this.topic]['words']);
+    const keys = Object.keys(FLASHCARD_DECKS[this.topic]['words']);
 
     const card = new Flashcard(flashcardContainer, 
-      keys[this.currentCard],
-      cards[this.topic]['words'][keys[this.currentCard]]
+      keys[cardIndex],
+      FLASHCARD_DECKS[this.topic]['words'][keys[cardIndex]]
     );
     if (this.currentCard == this.totalCards-1){
       document.dispatchEvent(new CustomEvent('all-cards-finish'));
     }
 
   }
+
+
 
   hide() {
     this.containerElement.classList.add('inactive');
@@ -58,11 +71,14 @@ class FlashcardScreen {
     if(this.currentCard < this.totalCards){
       this.show();
     }
+    console.log(this.wrongCards);
 
   }
 
   _onContinue(){
-    this.show();
+    this.numWrong = 0;
+    this.currentCard = 0;
+    this.show(true);
   }
 
   _onCardRight(event){
@@ -71,5 +87,7 @@ class FlashcardScreen {
 
   _onCardWrong(event){
     this.numWrong = this.numWrong + 1;
+    this.wrongCards.push(this.currentCard);
+
   }
 }

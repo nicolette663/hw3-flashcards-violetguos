@@ -18,10 +18,7 @@ class ResultsScreen {
     this.numRight = numRight;
     this.numWrong = numWrong;
     this.containerElement.classList.remove('inactive');
-    // if (this.numRight > 0)
-    //   this.numRight++;
-    // if (this.numWrong > 0)
-    //   this.numWrong++;
+
     const score = Math.round(this.numRight / (this.numRight + this.numWrong) * 100);
     const scoreSpan = this.containerElement.querySelector(".percent");
     scoreSpan.textContent = score.toString();
@@ -44,9 +41,6 @@ class ResultsScreen {
     this.containerElement.classList.add('inactive');
     
   }
-
-
-
 
   _onImperfectScore(events){
     document.dispatchEvent(new CustomEvent('continue-wrong-cards'));
