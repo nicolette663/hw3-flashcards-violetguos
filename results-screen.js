@@ -24,14 +24,26 @@ class ResultsScreen {
       this.numRight++;
     if (this.numWrong > 0)
       this.numWrong++;
+    const score = this.numRight * 100;
+    const scoreSpan = this.containerElement.querySelector(".percent");
+    scoreSpan.textContent = score.toString();
+    const rightSpan =  this.containerElement.querySelector(".correct");
+    const wrongSpan = this.containerElement.querySelector(".incorrect");
+    rightSpan.textContent = this.numRight.toString();
+    wrongSpan.textContent = this.numWrong.toString();
 
-    const rightSpan =  this.containerElement.querySelectorAll(".correct");
-    rightSpan[0].textContent = this.numRight.toString();
+    if(score < 100){
+      const button = this.containerElement.querySelector(".continue");
+      console.log("button");
+      button.textContent = "Continue";
+
+    }
     console.log(rightSpan);
   }
 
   hide() {
     this.containerElement.classList.add('inactive');
+    
   }
 
 

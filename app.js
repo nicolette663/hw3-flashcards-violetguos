@@ -49,4 +49,8 @@ class App {
     this.results.show();
   }
 
+  _onImperfectScore(){
+    this.flashcards.review();
+  }
+
 }

@@ -14,9 +14,8 @@ class FlashcardScreen {
     this.currentCard = 0;
     this._onOneCardFinish = this._onOneCardFinish.bind(this);
     document.addEventListener('one-card-finish', this._onOneCardFinish);
-
+    this.wrongCards = []; 
     this.totalCards =  Object.keys( FLASHCARD_DECKS[this.topic]['words']).length;
-    console.log("this.totalCards", this.totalCards);
   }
 
   show() {
