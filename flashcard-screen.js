@@ -15,7 +15,7 @@ class FlashcardScreen {
     this._onOneCardFinish = this._onOneCardFinish.bind(this);
     this._onContinue = this._onContinue.bind(this);
     this._onRestart = this._onRestart.bind(this);
-    
+
     document.addEventListener('one-card-finish', this._onOneCardFinish);
     document.addEventListener('continue-wrong-cards', this._onContinue);
     document.addEventListener('restart', this._onRestart);
@@ -32,16 +32,16 @@ class FlashcardScreen {
 
     this.wrongCards = []; 
     this.totalCards =  Object.keys( FLASHCARD_DECKS[this.topic]['words']).length;
+    this.review = false;
   }
 
-  show(review=false) {
+  show() {
     let cardIndex;
-    if(review){
+    if(this.review){
       // redo the cards we got wrong
-      this.totalCards = this.wrongCards.length;
       cardIndex = this.wrongCards.pop();
       // todo, check if the array empty
-      console.log(cardIndex);
+      console.log("cardIndex", cardIndex);
       console.log("wrong cards", this.wrongCards);
     }
     else{
@@ -57,10 +57,8 @@ class FlashcardScreen {
       keys[cardIndex],
       FLASHCARD_DECKS[this.topic]['words'][keys[cardIndex]]
     );
-    if (this.currentCard == this.totalCards-1){
-      document.dispatchEvent(new CustomEvent('all-cards-finish'));
-    }
 
+    
   }
 
   hide() {
@@ -69,10 +67,23 @@ class FlashcardScreen {
   
   _onOneCardFinish(event){
     this.currentCard++;
-    if(this.currentCard < this.totalCards){
-      this.show();
+    // if(this.currentCard < this.totalCards){
+    //   this.show();
+    // }
+    if (this.review){
+      if( this.wrongCards.length === 0)
+        document.dispatchEvent(new CustomEvent('all-cards-finish'));
+      else
+        this.show();
+
     }
-    console.log(this.wrongCards);
+    else{
+      if (this.currentCard === this.totalCards-1){
+        document.dispatchEvent(new CustomEvent('all-cards-finish'));
+      }
+      else
+        this.show();
+    }
 
   }
 
@@ -80,7 +91,10 @@ class FlashcardScreen {
     // review the wrong cards
     this.numWrong = 0;
     this.currentCard = 0;
-    this.show(true);
+    this.review = true
+    this.totalCards = this.wrongCards.length;
+
+    this.show();
   }
 
 
@@ -90,7 +104,8 @@ class FlashcardScreen {
     this.numRight = 0;
     this.currentCard = 0;
     this.wrongCards = [];
-    this.show(false);
+    this.review = false;
+    this.show();
   }
 
   _onCardRight(event){
