@@ -78,6 +78,8 @@ class FlashcardScreen {
 
     }
     else{
+      console.log("current card", this.currentCard);
+      
       if (this.currentCard === this.totalCards-1){
         document.dispatchEvent(new CustomEvent('all-cards-finish'));
       }
@@ -105,6 +107,8 @@ class FlashcardScreen {
     this.currentCard = 0;
     this.wrongCards = [];
     this.review = false;
+    this.totalCards =  Object.keys( FLASHCARD_DECKS[this.topic]['words']).length;
+
     this.show();
   }
 

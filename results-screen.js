@@ -28,7 +28,7 @@ class ResultsScreen {
     rightSpan.textContent = this.numRight.toString();
     wrongSpan.textContent = this.numWrong.toString();
 
-    if(score < 100){
+    if(score < 100 || this.numWrong != 0){
       const button = this.containerElement.querySelector(".continue");
       console.log("button", button);
       button.textContent = "Continue";
