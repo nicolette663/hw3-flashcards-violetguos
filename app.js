@@ -20,10 +20,14 @@ class App {
 
     this._onSelectMenuCSS = this._onSelectMenuCSS.bind(this);
     this._onSelectMenuBasic = this._onSelectMenuBasic.bind(this);
+    this._onSelectFood = this._onSelectFood.bind(this);
+    
     this._onAllCardsFinish = this._onAllCardsFinish.bind(this);
 
     document.addEventListener('css-menu-selected', this._onSelectMenuCSS);
     document.addEventListener('basic-menu-selected', this._onSelectMenuBasic);
+    document.addEventListener('food-menu-selected', this._onSelectFood);
+
     document.addEventListener('all-cards-finish', this._onAllCardsFinish);
 
   }
@@ -35,6 +39,11 @@ class App {
 
   _onSelectMenuBasic(){
     this.flashcards = new FlashcardScreen(this.mainElement, 1);
+    this.flashcards.show();
+  }
+
+  _onSelectFood(){
+    this.flashcards = new FlashcardScreen(this.mainElement, 2);
     this.flashcards.show();
   }
 

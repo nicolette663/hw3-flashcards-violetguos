@@ -39,8 +39,11 @@ class MenuScreen {
     const choiceDiv = document.querySelector('#choices');
     this._initAnimCSS = this._initAnimCSS.bind(this);
     this._initAnimBasic = this._initAnimBasic.bind(this);
+    this._initAnimFood = this._initAnimFood.bind(this);
     choiceDiv.childNodes[0].addEventListener('click', this._initAnimCSS);
     choiceDiv.childNodes[1].addEventListener('click', this._initAnimBasic);
+    choiceDiv.childNodes[2].addEventListener('click', this._initAnimFood);
+
   }
 
   _initAnimCSS(event){
@@ -52,6 +55,11 @@ class MenuScreen {
   _initAnimBasic(event){
     this.hide();
     document.dispatchEvent(new CustomEvent('basic-menu-selected'));
+  }  
+
+  _initAnimFood(event){
+    this.hide();
+    document.dispatchEvent(new CustomEvent('food-menu-selected'));
   }  
 
 }

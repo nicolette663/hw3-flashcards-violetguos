@@ -67,9 +67,7 @@ class FlashcardScreen {
   
   _onOneCardFinish(event){
     this.currentCard++;
-    // if(this.currentCard < this.totalCards){
-    //   this.show();
-    // }
+
     if (this.review){
       if( this.wrongCards.length === 0)
         document.dispatchEvent(new CustomEvent('all-cards-finish'));
@@ -79,7 +77,7 @@ class FlashcardScreen {
     }
     else{
       console.log("current card", this.currentCard);
-      
+
       if (this.currentCard === this.totalCards-1){
         document.dispatchEvent(new CustomEvent('all-cards-finish'));
       }
