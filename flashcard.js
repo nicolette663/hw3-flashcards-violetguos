@@ -112,6 +112,11 @@ class Flashcard {
       }
       document.dispatchEvent(new CustomEvent('one-card-finish'));
 
+      // revert back to initial background colour
+      const docBody = document.querySelector('body');
+
+      docBody.style.backgroundColor = '#d0e6df';
+
 
     }
     else{

@@ -26,20 +26,15 @@ class App {
     document.addEventListener('basic-menu-selected', this._onSelectMenuBasic);
     document.addEventListener('all-cards-finish', this._onAllCardsFinish);
 
-
-
-    //this.results.show();
   }
 
   _onSelectMenuCSS(){
     this.flashcards = new FlashcardScreen(this.mainElement, 0);
-
     this.flashcards.show();
   }
 
   _onSelectMenuBasic(){
     this.flashcards = new FlashcardScreen(this.mainElement, 1);
-
     this.flashcards.show();
   }
 
@@ -48,5 +43,6 @@ class App {
     this.flashcards.hide();
     this.results.show(this.flashcards.numRight, this.flashcards.numWrong);
   }
+
 
 }

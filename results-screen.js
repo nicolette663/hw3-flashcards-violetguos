@@ -11,6 +11,7 @@ class ResultsScreen {
     this.containerElement = containerElement;
 
     this._onImperfectScore = this._onImperfectScore.bind(this);
+    this._onPerfectScore = this._onPerfectScore.bind(this);
 
   }
 
@@ -34,7 +35,13 @@ class ResultsScreen {
       button.addEventListener("click", this._onImperfectScore ); 
 
     }
-    console.log(rightSpan);
+    else{
+      const button = this.containerElement.querySelector(".continue");
+      button.textContent = "Start Over";
+      button.addEventListener("click", this._onPerfectScore ); 
+
+    }
+
   }
 
   hide() {
@@ -44,6 +51,11 @@ class ResultsScreen {
 
   _onImperfectScore(events){
     document.dispatchEvent(new CustomEvent('continue-wrong-cards'));
+    this.hide();
+  }
+
+  _onPerfectScore(event){
+    document.dispatchEvent(new CustomEvent('restart'));
     this.hide();
   }
 

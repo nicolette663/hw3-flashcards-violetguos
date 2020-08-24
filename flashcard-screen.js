@@ -14,9 +14,12 @@ class FlashcardScreen {
     this.currentCard = 0;
     this._onOneCardFinish = this._onOneCardFinish.bind(this);
     this._onContinue = this._onContinue.bind(this);
+    this._onRestart = this._onRestart.bind(this);
+    
     document.addEventListener('one-card-finish', this._onOneCardFinish);
     document.addEventListener('continue-wrong-cards', this._onContinue);
-    
+    document.addEventListener('restart', this._onRestart);
+
     // keep track of wrong cards and scores
     this.numRight = 0;
     this.numWrong = 0;
@@ -60,8 +63,6 @@ class FlashcardScreen {
 
   }
 
-
-
   hide() {
     this.containerElement.classList.add('inactive');
   }
@@ -76,9 +77,20 @@ class FlashcardScreen {
   }
 
   _onContinue(){
+    // review the wrong cards
     this.numWrong = 0;
     this.currentCard = 0;
     this.show(true);
+  }
+
+
+  _onRestart(){
+    // restart the same deck
+    this.numWrong = 0;
+    this.numRight = 0;
+    this.currentCard = 0;
+    this.wrongCards = [];
+    this.show(false);
   }
 
   _onCardRight(event){
